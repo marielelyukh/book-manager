@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>{{ data ? 'Edit Book' : 'Add Book' }}</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="bookForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" required>
+      <mat-error *ngIf="bookForm.get('title')?.invalid">Title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Author</mat-label>
+      <input matInput formControlName="author" required>
+      <mat-error *ngIf="bookForm.get('author')?.invalid">Author is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Year of Publication</mat-label>
+      <input matInput formControlName="year" required type="number">
+      <mat-error *ngIf="bookForm.get('year')?.invalid">Year is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+      <mat-error *ngIf="bookForm.get('description')?.invalid">Description is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cover Image URL</mat-label>
+      <input matInput formControlName="coverImage">
+    </mat-form-field>
+
+    <img *ngIf="bookForm.get('coverImage')?.value" [src]="bookForm.get('coverImage')?.value" alt="Book cover image" width="100%">
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button color="primary" [disabled]="bookForm.invalid" (click)="onSave()">Save</button>
+</div>
